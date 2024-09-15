@@ -32,7 +32,7 @@
                 <th>Category Name</th>
                 <th>Author Name</th>
                 <th>Average Rating</th>
-                <th>Voter</th>
+                <th>Voters</th>
             </tr>
         </thead>
         <tbody>
