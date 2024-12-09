@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\author;
 use App\Models\book;
 use App\Models\rating;
 use Illuminate\Http\Request;
@@ -14,8 +15,9 @@ class RatingController extends Controller
     public function create()
     {
         // Fetch authors and books for the dropdown inputs
-        $books = book::with('author')->get();
-        return view('ratings.create', compact('books'));
+        $authors = author::orderBy('name', 'desc')->get();
+        $books = book::with('author')->paginate(50);
+        return view('ratings.create', compact('books', 'authors'));
     }
 
     /**

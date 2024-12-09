@@ -16,41 +16,64 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-
-    // NB: inRandomOrder means that the query will be ordered randomly
     public function run(): void
     {
         $faker = Faker::create();
 
-        // Generate 1000 fake authors
+        // Bulk insert for authors
+        $authors = [];
         for ($i = 0; $i < 1000; $i++) {
-            author::create([
-                'name' => $faker->name
-            ]);
+            $authors[] = ['name' => $faker->name];
         }
+        author::insert($authors);
 
-        // Generate 3000 fake book categories
+        // Bulk insert for categories
+        $categories = [];
         for ($i = 0; $i < 3000; $i++) {
-            category::create([
-                'name' => $faker->word
-            ]);
+            $categories[] = ['name' => $faker->word];
         }
+        category::insert($categories);
 
-        // Generate 100,000 fake books
+        // Bulk insert for books
+        $authorIds = author::pluck('id')->toArray();
+        $categoryIds = category::pluck('id')->toArray();
+
+        $books = [];
         for ($i = 0; $i < 100000; $i++) {
-            book::create([
-                'author_id' => author::inRandomOrder()->first()->id,
-                'category_id' => category::inRandomOrder()->first()->id,
+            $books[] = [
+                'author_id' => $authorIds[array_rand($authorIds)],
+                'category_id' => $categoryIds[array_rand($categoryIds)],
                 'title' => $faker->sentence
-            ]);
+            ];
+
+            // Insert in chunks to manage memory
+            if (count($books) >= 1000) {
+                book::insert($books);
+                $books = [];
+            }
+        }
+        if (!empty($books)) {
+            book::insert($books);
         }
 
-        // Generate 500,000 fake ratings
+        // Bulk insert for ratings
+        $bookIds = book::pluck('id')->toArray();
+
+        $ratings = [];
         for ($i = 0; $i < 500000; $i++) {
-            rating::create([
-                'book_id' => book::inRandomOrder()->first()->id,
+            $ratings[] = [
+                'book_id' => $bookIds[array_rand($bookIds)],
                 'rating' => $faker->numberBetween(1, 10),
-            ]);
+            ];
+
+            // Insert in chunks to manage memory
+            if (count($ratings) >= 1000) {
+                rating::insert($ratings);
+                $ratings = [];
+            }
+        }
+        if (!empty($ratings)) {
+            rating::insert($ratings);
         }
     }
 }
