@@ -6,8 +6,9 @@
 <div class="container">
     <h1>Input Rating</h1>
     <form action="{{ route('ratings.store') }}" method="POST">
-        @csrf
+        @csrf 
         <div class="w-50 py-3">
+            {{-- Author --}}
             <div class="form-group">
                 <label for="author_id">Select Author</label>
                 <select id="author_id" name="author_id" class="form-control">
@@ -18,6 +19,7 @@
                 </select>
             </div>
 
+            {{-- Book --}}
             <div class="form-group">
                 <label for="book_id">Select Book</label>
                 <select id="book_id" name="book_id" class="form-control" required>
@@ -30,6 +32,7 @@
                 </select>
             </div>
 
+            {{-- Rating --}}
             <div class="form-group">
                 <label for="rating">Rating</label>
                 <select id="rating" name="rating" class="form-control" required>
@@ -45,6 +48,7 @@
 </div>
 
 <script>
+// Add event listener to author select
 document.getElementById('author_id').addEventListener('change', function() {
     const authorId = this.value;
     const bookSelect = document.getElementById('book_id');

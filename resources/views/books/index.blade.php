@@ -10,8 +10,9 @@
         <form method="GET" action="{{ route('books.index') }}">
             <input type="hidden" name="search" value="{{ $search }}">
             <select name="listShown" onchange="this.form.submit()" class="form-select">
-                <option value="10" {{ $listShown == 10 ? 'selected' : '' }}>10 rows</option>
-                <option value="100" {{ $listShown == 100 ? 'selected' : '' }}>100 rows</option>
+                @for ($i = 10; $i <= 100; $i += 10)
+                    <option value="{{ $i }}" {{ request('listShown') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                @endfor
             </select>
         </form>
     </div>
