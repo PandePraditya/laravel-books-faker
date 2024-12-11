@@ -19,7 +19,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $author->name }}</td>
-                    <td>{{ $author->voter_count }}</td>
+                    <td>{{ $author->voters_count }}</td>
                 </tr>
             @endforeach
         </tbody>
