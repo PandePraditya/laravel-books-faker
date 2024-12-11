@@ -12,11 +12,18 @@ class RatingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        // Fetch authors and books for the dropdown inputs
-        $authors = author::orderBy('name', 'desc')->get();
-        $books = book::with('author')->paginate(50);
+        // Fetch authors for the dropdown
+        $authors = author::orderBy('name', 'asc')->get();
+
+        // Fetch books for the dropdown, optionally filtered by author
+        $books = book::with('author')->where(function ($query) use ($request) {
+            if ($request->has('author_id') && $request->author_id) {
+                $query->where('author_id', $request->author_id);
+            }
+        })->get();
+
         return view('ratings.create', compact('books', 'authors'));
     }
 
