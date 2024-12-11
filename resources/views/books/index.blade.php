@@ -3,8 +3,7 @@
 @section('title', 'Books')
 
 @section('content')
-    
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
         <p class="me-2">List Shown : </p>
         <!-- Rows per Page Dropdown -->
         <form method="GET" action="{{ route('books.index') }}">
@@ -17,11 +16,11 @@
         </form>
     </div>
 
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
         <p class="me-2">Search : </p>
-        <form method="GET" action="{{ route('books.index') }}" class="py-2">
-            <input type="text" class="form-control mb-2" name="search" value="{{ $search }}" placeholder="Search by title, author, or category">
-            <button type="submit" class="btn btn-primary">Search</button>
+        <form method="GET" action="{{ route('books.index') }}" class="py-2 d-flex">
+            <input type="text" class="form-control mb-2 me-3" name="search" value="{{ $search }}" placeholder="Search by title, author, or category">
+            <button type="submit" class="btn btn-primary h-50">Search</button>
         </form>
     </div>
 
@@ -66,4 +65,7 @@
             @endforeach
         </tbody>
     </table>
+
+    <!-- Pagination Links -->
+    {{ $books->appends(request()->input())->links() }}
 @endsection

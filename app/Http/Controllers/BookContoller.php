@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\book;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class BookContoller extends Controller
@@ -15,14 +16,19 @@ class BookContoller extends Controller
         $search = $request->input('search'); // Get the search query
         $listShown = $request->input('listShown', 10); // Get the number of items per page
 
-        $books = book::with('author', 'category', 'ratings')
+        $books = Book::with(['author', 'category', 'ratings'])
             ->when($search, function ($query, $search) {
-                return $query->where('title', 'like', "%{$search}%")->orWhereHas('author', function ($q) use ($search) {
+                return $query->where('title', 'like', "%{$search}%")
+                    ->orWhereHas('author', function (Builder $q) use ($search) {
                         $q->where('name', 'like', "%{$search}%");
-                    })->orWhereHas('category', function ($q) use ($search) {
+                    })
+                    ->orWhereHas('category', function (Builder $q) use ($search) {
                         $q->where('name', 'like', "%{$search}%");
                     });
-            })->paginate($listShown);
+            })
+            ->withAvg('ratings', 'rating') // load average rating
+            ->orderByDesc('ratings_avg_rating') // Default sort by highest rating
+            ->paginate($listShown);
 
         return view('books.index', compact('books', 'search', 'listShown'));
     }
