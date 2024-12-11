@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\author;
 use App\Models\book;
 use App\Models\rating;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class RatingController extends Controller
@@ -18,7 +19,7 @@ class RatingController extends Controller
         $authors = author::orderBy('name', 'asc')->get();
 
         // Fetch books for the dropdown, optionally filtered by author
-        $books = book::with('author')->where(function ($query) use ($request) {
+        $books = book::with('author')->where(function (Builder $query) use ($request) {
             if ($request->has('author_id') && $request->author_id) {
                 $query->where('author_id', $request->author_id);
             }
