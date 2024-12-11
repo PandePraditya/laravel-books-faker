@@ -11,6 +11,6 @@
     <div class="container p-5">
         @yield('content')
     </div>
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
 </body>
 </html>
