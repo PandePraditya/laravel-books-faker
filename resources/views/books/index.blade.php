@@ -67,5 +67,5 @@
     </table>
 
     <!-- Pagination Links -->
-    {{ $books->appends(request()->input())->links() }}
+    {{ $books->appends(request()->input())->links() }} {{-- append so search doesnt reset --}}
 @endsection
