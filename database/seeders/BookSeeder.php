@@ -33,7 +33,7 @@ class BookSeeder extends Seeder
             ];
 
             // Insert in chunks to manage memory
-            if (count($books) >= 500) {
+            if (count($books) >= 1000) {
                 book::insert($books);
                 $books = [];
             }
