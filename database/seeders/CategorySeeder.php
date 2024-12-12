@@ -19,7 +19,11 @@ class CategorySeeder extends Seeder
         // Bulk insert for categories
         $categories = [];
         for ($i = 0; $i < 3000; $i++) {
-            $categories[] = ['name' => $faker->word];
+            $categories[] = [
+                'name' => $faker->word,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
         }
         category::insert($categories);
     }

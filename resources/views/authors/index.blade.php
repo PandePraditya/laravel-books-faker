@@ -6,7 +6,7 @@
     <h1>Top 10 Most Famous Authors </h1>
 
     <!-- Authors Table -->
-    <table class="table table-bordered" border="2">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>No</th>

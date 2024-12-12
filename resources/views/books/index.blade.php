@@ -24,7 +24,7 @@
         </form>
     </div>
 
-    <table border="2" class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>No</th>
@@ -38,7 +38,7 @@
         <tbody>
             @foreach ($books as $book)
                 <tr>
-                    <th scope="row">
+                    <th scope="row" class="text-center">
                         {{ ($books->currentPage() - 1) * $books->perPage() + $loop->iteration }}
                     </th>
 

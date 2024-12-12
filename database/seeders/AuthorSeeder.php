@@ -19,7 +19,11 @@ class AuthorSeeder extends Seeder
         // Bulk insert for authors
         $authors = [];
         for ($i = 0; $i < 1000; $i++) {
-            $authors[] = ['name' => $faker->name];
+            $authors[] = [
+                'name' => $faker->name,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
         }
         author::insert($authors);
     }

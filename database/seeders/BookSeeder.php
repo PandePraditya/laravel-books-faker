@@ -27,11 +27,13 @@ class BookSeeder extends Seeder
             $books[] = [
                 'author_id' => $authorIds[array_rand($authorIds)],
                 'category_id' => $categoryIds[array_rand($categoryIds)],
-                'title' => $faker->sentence
+                'title' => $faker->sentence,
+                'created_at' => now(),
+                'updated_at' => now(),
             ];
 
             // Insert in chunks to manage memory
-            if (count($books) >= 1000) {
+            if (count($books) >= 500) {
                 book::insert($books);
                 $books = [];
             }
