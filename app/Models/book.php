@@ -17,16 +17,16 @@ class book extends Model
 
     public function author()
     {
-        return $this->belongsTo(author::class);
+        return $this->belongsTo(author::class); // Association with the 'author' model
     }
 
     public function category()
     {
-        return $this->belongsTo(category::class);
+        return $this->belongsTo(category::class); // Association with the 'category' model
     }
 
     public function ratings()
     {
-        return $this->hasMany(rating::class);
+        return $this->hasMany(rating::class); // Association with the 'rating' model
     }
 }

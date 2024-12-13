@@ -32,6 +32,6 @@ class BookContoller extends Controller
             ->orderByDesc('ratings_avg_rating') // Default sort by highest rating
             ->paginate($listShown); // Paginate the results by listShown
 
-        return view('books.index', compact('books', 'search'));
+        return view('books.index', compact('books', 'search')); // Pass books and search to the view
     }
 }

@@ -15,6 +15,6 @@ class category extends Model
 
     public function book()
     {
-        return $this->hasMany(book::class);
+        return $this->hasMany(book::class); // Association with the 'book' model, hasMany in sql is the many in one to many
     }
 }

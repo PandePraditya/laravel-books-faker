@@ -15,11 +15,11 @@ class author extends Model
 
     public function book()
     {
-        return $this->hasMany(book::class);
+        return $this->hasMany(book::class); // Association with the 'book' model
     }
 
     public function ratings()
     {
-        return $this->hasManyThrough(rating::class, book::class);
+        return $this->hasManyThrough(rating::class, book::class); // hasManyThrough in sql is many to many
     }
 }
