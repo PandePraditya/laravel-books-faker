@@ -11,12 +11,12 @@ class AuthorController extends Controller
      */
     public function index() 
 {
-    $authors = Author::withCount('ratings as voters_count') // Assumes you have a proper relationship setup
-        ->having('voters_count', '>=', 5)
-        ->orderByDesc('voters_count')
-        ->limit(10)
+    $authors = Author::withCount('ratings as voters_count') // Get the number of ratings for each author
+        ->having('voters_count', '>=', 5) // Filter authors with at least 5 ratings and more
+        ->orderByDesc('voters_count') // Sort by the number of ratings
+        ->limit(10) // Limit to the top 10
         ->get();
 
-    return view('authors.index', compact('authors'));
+    return view('authors.index', compact('authors')); // Pass authors to the view
 }
 }

@@ -32,7 +32,7 @@ class BookSeeder extends Seeder
                 'updated_at' => now(),
             ];
 
-            // Insert in chunks to manage memory
+            // Insert in chunks to manage memory, 1000 per chunk. Change the number as needed
             if (count($books) >= 1000) {
                 book::insert($books);
                 $books = [];

@@ -26,6 +26,6 @@ Route::get('/', [BookContoller::class, 'index'])->name('books.index');
 // for author page of top ten authors
 Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
 
-// for rating page and post rating
+// for rating page and posts rating
 Route::get('/ratings', [RatingController::class, 'create'])->name('ratings.create');
 Route::post('/ratings', [RatingController::class, 'store'])->name('ratings.store');

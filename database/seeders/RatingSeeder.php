@@ -29,7 +29,7 @@ class RatingSeeder extends Seeder
                 'updated_at' => $timestamp,
             ];
 
-            // Insert in chunks to manage memory
+            // Insert in chunks to manage memory, 500 per chunk. Change the number as needed
             if (count($ratings) >= 500) {
                 rating::insert($ratings);
                 $ratings = [];

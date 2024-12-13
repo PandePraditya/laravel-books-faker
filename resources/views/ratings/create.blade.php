@@ -23,6 +23,7 @@
             </div>
         </form>
 
+        {{-- Form if author is selected --}}
         @if (request('author_id'))
             <form action="{{ route('ratings.store') }}" method="POST">
                 @csrf

@@ -16,6 +16,7 @@
         </form>
     </div>
 
+    {{-- Search --}}
     <div class="d-flex align-items-center">
         <p class="me-2">Search : </p>
         <form method="GET" action="{{ route('books.index') }}" class="py-2 d-flex">
@@ -24,6 +25,7 @@
         </form>
     </div>
 
+    {{-- Books Table --}}
     <table class="table table-bordered">
         <thead>
             <tr>
